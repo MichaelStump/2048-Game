@@ -35,7 +35,7 @@ public class Frame extends JFrame {
 	//declarations of board mode booleans
 	public boolean rainbow = false;
 	public boolean rainbow2 = false;
-	public boolean partyMode = false;
+	public boolean winMode = false;
 	public boolean colorPulse = false;
 	public boolean textOn = true;
 	
@@ -180,11 +180,11 @@ public class Frame extends JFrame {
 		}
 
 		if (board.hasLost()) {
-			this.setTitle("2048                         GAME OVER!            Press R to Restart                      Score: " + String.valueOf(this.board.score));
+			this.setTitle("GAME OVER! Press R to Restart Score: " + String.valueOf(this.board.score));
 		}
 
 		else if (board.winCount == 1) {
-			this.setTitle("2048         YOU WIN!       Keep Playing to Keep Going      " + "Timer: " + winMin +  ":" + winSec + "." + winTenthSec +"    Score:  " + String.valueOf(this.board.score));
+			this.setTitle("2048   YOU WIN! Keep Playing to Continue " + "Timer: " + winMin +  ":" + winSec + "." + winTenthSec +"    Score:  " + String.valueOf(this.board.score));
 		}
 		else if (board.winCount >=1) {
 
@@ -205,7 +205,7 @@ public class Frame extends JFrame {
 	//Sets the tile color based on what mode the user is in
 	public void setTileColor(JButton button, int r, int c) {
 
-		if (partyMode) {
+		if (winMode) {
 			int randCol = rand.nextInt(11);
 			if (randCol == 0) buttonList[r][c].setBackground(new Color(204, 192, 179));
 			if (randCol == 1) buttonList[r][c].setBackground(new Color(255, 0, 0));
@@ -428,7 +428,7 @@ public void colorPulse2(int i) {
 
 			if ((board.winCount == 1 && board.winTest == false)) {
 				board.winTest=true;
-				partyMode = true;
+				winMode = true;
 				break;
 			}
 		}

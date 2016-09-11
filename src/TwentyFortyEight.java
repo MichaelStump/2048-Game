@@ -15,7 +15,7 @@ public class TwentyFortyEight {
 
 		//Commented out line below has the computer run random moves until it loses
 		//board.computerGo();
-		
+
 		//starts the timer
 		frame.time();
 		

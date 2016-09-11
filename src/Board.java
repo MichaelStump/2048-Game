@@ -472,59 +472,68 @@ public class Board implements KeyListener {
 		case KeyEvent.VK_A:
 			moveLeft();
 			printBoard();
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			hasMoved = true;
 			break;
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_D:
 			moveRight();
 			printBoard();
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			hasMoved = true;
 			break;
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_W:
 			moveUp();
 			printBoard();
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			hasMoved = true;
 			break;
 		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_S:
 			moveDown();
 			printBoard();
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			hasMoved = true;
 			break;
 
-			//			Cheat is used for debugging, commented out in final version
-		case KeyEvent.VK_C:
+		//Cheat is used for debugging: places 1024 tile, commented out in final version
+		/*
+		 	case KeyEvent.VK_C:
 			board[0][0] = 1024;
 			break;
-
+		*/
 			//restarts the game when R is pressed
 		case KeyEvent.VK_R:
 			reStart();
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			break;
 
 			//number keys change the game mode
+			
+			//1 changes the game to powers of 2 instead of multiples of 2: 11 as opposed to 2048
 		case KeyEvent.VK_1:
 			if (gameMode == "2048") gameMode = "11";
 			else gameMode = "2048";
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			break;
+			
+			//2 changes the game to have nice rainbow colors that are aesthetically pleasing
 		case KeyEvent.VK_2:
 			if (!frahm.rainbow2) frahm.rainbow2 = true;
 			else frahm.rainbow2 = false;
-			if(frahm.partyMode) frahm.partyMode = false;
+			if(frahm.winMode) frahm.winMode = false;
 			if (frahm.colorPulse) frahm.colorPulse = false;
 			break;
+			
+			//3 changes the game to have a pulsing rainbow, matching values have matching colors at a single instant
 		case KeyEvent.VK_3:
 			if (!frahm.colorPulse) frahm.colorPulse = true;
 			else frahm.colorPulse = false;
 			if (frahm.rainbow2) frahm.rainbow2 = false;
 			break;
+			
+			//4 turns off the numbers. When combined with 3, it becomes very challenging
 		case KeyEvent.VK_4:
 			if (frahm.textOn) frahm.textOn = false;
 			else frahm.textOn = true;
@@ -549,6 +558,7 @@ public class Board implements KeyListener {
 		}
 	}
 
+	//KeyListener methods declared here
 	@Override
 	public void keyReleased(KeyEvent e) {
 
@@ -560,7 +570,7 @@ public class Board implements KeyListener {
 
 	}
 
-	//sets all score, winCount, and all values of the board to 0, also spawns to new tiles
+	//sets all score, winCount, and all values of the board to 0, also spawns two new tiles
 	public void reStart() {
 
 		for (int r = 0; r < rows; r++) {
@@ -571,7 +581,7 @@ public class Board implements KeyListener {
 		score = 0;
 		winCount = 0;
 		winTest = false;
-		frahm.partyMode = false;
+		frahm.winMode = false;
 
 		spawn();
 		spawn();
@@ -584,6 +594,7 @@ public class Board implements KeyListener {
 		this.frahm = frame;
 	}
 
+	//Unused method that made it possible to randomly spawn higher number tiles than 2 and 4
 	public void randomAttack() {
 
 		int val = 0;
@@ -618,6 +629,8 @@ public class Board implements KeyListener {
 		}
 
 	}
+	
+	//initial attempt to save high score below, but was not completed
 	/*
 	public static void Save(int score) throws IOException{
 		FileWriter f = new FileWriter(new File("e12k439.txt"));
@@ -640,8 +653,8 @@ public class Board implements KeyListener {
 	 */
 
 	//method used for performing massive amounts of moves on a larger grid
-	//performs several hundred thousand moves every second
-	//redraws every 100,000 to decrease lag
+	//performs thousands of moves every second
+	//redraws every 4000 moves to decrease lag
 	public void computerGo() {
 
 		computerMode = true;
@@ -659,13 +672,11 @@ public class Board implements KeyListener {
 				frahm.reDraw();
 				counter = 0;
 			}
-
 			counter++;
-
 		}
-
 	}
-
+	//An unused method that lays out tiles in an interesting pattern
+	//Mostly created for educational purposes
 	public void ultimateCheckers() {
 		int two = 2;
 
