@@ -65,32 +65,6 @@ public class Board implements KeyListener {
 		if (gameMode.equals("2048") || gameMode.equals("2048 - Easy")) {
 			if (x == 0)
 				return "";
-			if (x == 2)
-				return "2";
-			if (x == 4)
-				return "4";
-			if (x == 8)
-				return "8";
-			if (x == 16)
-				return "16";
-			if (x == 32)
-				return "32";
-			if (x == 64)
-				return "64";
-			if (x == 128)
-				return "128";
-			if (x == 256)
-				return "256";
-			if (x == 512)
-				return "512";
-			if (x == 1024)
-				return "1024";
-			if (x == 2048)
-				return "2048";
-			if (x == 4096)
-				return "4096";
-			if (x == 8192)
-				return "8192";
 			else
 				return String.valueOf(x);
 		}
@@ -98,34 +72,9 @@ public class Board implements KeyListener {
 		if (gameMode.equals("11")) {
 			if (x == 0)
 				return "";
-			if (x == 2)
-				return "1";
-			if (x == 4)
-				return "2";
-			if (x == 8)
-				return "3";
-			if (x == 16)
-				return "4";
-			if (x == 32)
-				return "5";
-			if (x == 64)
-				return "6";
-			if (x == 128)
-				return "7";
-			if (x == 256)
-				return "8";
-			if (x == 512)
-				return "9";
-			if (x == 1024)
-				return "10";
-			if (x == 2048)
-				return "11";
-			if (x == 4096)
-				return "12";
-			if (x == 8192)
-				return "13";
+			
 			else
-				return "";
+				return String.valueOf((int)(Math.log(x)/Math.log(2)));
 		}
 		else {
 			return "";
@@ -294,7 +243,7 @@ public class Board implements KeyListener {
 			spawn();
 		}
 		if (!somethingHappened) {
-			System.out.println("Can't move that way silly :P");
+			System.out.println("That move results in no change to the Board.");
 		}
 	}
 
